@@ -19,6 +19,38 @@ pip install -r requirements.txt
 ```
 
 
+## Usage
+
+This repository uses a tool called invoke to execute build and test tasks.  To see a list of available tasks, run:
+
+```bash
+invoke --list
+```
+
+To run the tests, run:
+
+```bash
+invoke test
+```
+
+To run the tests with coverage, run:
+
+```bash
+invoke cover
+```
+
+To update the current version of pip, run:
+
+```bash
+invoke update-pip
+```
+
+To clean up the repository, run:
+
+```bash
+invoke clean
+```
+
 ## Running the tests
 Run the tests with pytest:
 
