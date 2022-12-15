@@ -47,6 +47,9 @@ def encode(data: int) -> str:
 
 
 def decode(data: str) -> int:
+    if data == "":
+        raise ValueError("Unable to decode empty string!")
+
     if data == ".":
         return 0
 
