@@ -51,6 +51,30 @@ def is_prime(n: int) -> bool:
     return True
 
 
+def next_prime(n: int) -> int:
+    """Return the next prime number after n.
+
+    :param n: The number to find the next prime number after.
+    :return: The next prime number after n.
+    """
+    if n < 1:
+        return 2
+
+    if n == 1:
+        return 2
+
+    if is_prime(n):
+        n += 1
+
+    if is_even(n):
+        n += 1
+
+    while not is_prime(n):
+        n += 2
+
+    return n
+
+
 def least_prime_factor(n: int) -> int:
     """Return the least prime factor of n.
 

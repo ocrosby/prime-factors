@@ -1,6 +1,7 @@
 from utils.prime import prime_factors
 from utils.prime import sieve_of_eratosthenes
 from utils.prime import least_prime_factor
+from utils.prime import next_prime
 
 
 class TestPrimeFactors:
@@ -61,6 +62,7 @@ class TestPrimeFactors:
     def test_12246(self):
         assert prime_factors(12246) == [2, 3, 13, 157]
 
+
 class TestLeastPrimeFactor:
     def test_1(self):
         assert least_prime_factor(1) == 1
@@ -91,6 +93,74 @@ class TestLeastPrimeFactor:
 
     def test_10(self):
         assert least_prime_factor(10) == 2
+
+
+class TestNextPrime:
+    def test_0(self):
+        assert next_prime(0) == 2
+
+    def test_1(self):
+        assert next_prime(1) == 2
+
+    def test_2(self):
+        assert next_prime(2) == 3
+
+    def test_3(self):
+        assert next_prime(3) == 5
+
+    def test_4(self):
+        assert next_prime(4) == 5
+
+    def test_5(self):
+        assert next_prime(5) == 7
+
+    def test_6(self):
+        assert next_prime(6) == 7
+
+    def test_7(self):
+        assert next_prime(7) == 11
+
+    def test_8(self):
+        assert next_prime(8) == 11
+
+    def test_9(self):
+        assert next_prime(9) == 11
+
+    def test_10(self):
+        assert next_prime(10) == 11
+
+    def test_11(self):
+        assert next_prime(11) == 13
+
+    def test_12(self):
+        assert next_prime(12) == 13
+
+    def test_13(self):
+        assert next_prime(13) == 17
+
+    def test_14(self):
+        assert next_prime(14) == 17
+
+    def test_15(self):
+        assert next_prime(15) == 17
+
+    def test_16(self):
+        assert next_prime(16) == 17
+
+    def test_17(self):
+        assert next_prime(17) == 19
+
+    def test_18(self):
+        assert next_prime(18) == 19
+
+    def test_19(self):
+        assert next_prime(19) == 23
+
+    def test_20(self):
+        assert next_prime(20) == 23
+
+
+
 
 
 class TestSieveOfEratosthenes:
