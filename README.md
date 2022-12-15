@@ -13,6 +13,9 @@ numbers.  The table blow displays the encoding of the numbers from 0 to 11.
 ## Setup
 Create a virtual environment and install the requirements:
 
+Note: This has all been written using Python 3.10.8, so newer versions may work, but older versions may 
+have some issues.
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
