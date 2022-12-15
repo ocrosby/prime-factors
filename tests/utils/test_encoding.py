@@ -1,3 +1,5 @@
+import pytest
+
 from utils import encoding
 
 
@@ -37,4 +39,16 @@ class TestEncode:
 
     def test_11(self):
         assert encoding.encode(11) == "(....())"
+
+
+class TestDecode:
+    def test_empty(self):
+        with pytest.raises(ValueError, match="Unable to decode empty string!"):
+            encoding.decode("")
+
+    def test_0(self):
+        assert encoding.decode(".") == 0
+
+    def test_1(self):
+        assert encoding.decode("()") == 1
 
