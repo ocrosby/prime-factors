@@ -2,6 +2,7 @@
 A repository demonstrating prime factorization.
 
 ![Test](https://github.com/ocrosby/prime-factors/actions/workflows/python-app.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/ocrosby/prime-factors/badge.svg?branch=main)](https://coveralls.io/github/ocrosby/prime-factors?branch=main)
 
 ## Problem Description
 The following task has two parts.  First you must figure out the principle behind the following encoding of natural
