@@ -1,6 +1,7 @@
 import pytest
 
 from utils import encoding
+from collections import deque
 
 
 class TestEncode:
@@ -44,37 +45,37 @@ class TestEncode:
 class TestDecodeExponents:
 
     def test_2(self):
-        assert encoding.decode_exponents("(())") == [1]
+        assert encoding.decode_exponents("(())") == deque([1])
 
     def test_3(self):
-        assert encoding.decode_exponents("(.())") == [0, 1]
+        assert encoding.decode_exponents("(.())") == deque([0, 1])
 
     def test_4(self):
-        assert encoding.decode_exponents("((()))") == [2]
+        assert encoding.decode_exponents("((()))") == deque([2])
 
     def test_5(self):
-        assert encoding.decode_exponents("(..())") == [0, 0, 1]
+        assert encoding.decode_exponents("(..())") == deque([0, 0, 1])
 
     def test_6(self):
-        assert encoding.decode_exponents("(()())") == [1, 1]
+        assert encoding.decode_exponents("(()())") == deque([1, 1])
 
     def test_7(self):
-        assert encoding.decode_exponents("(...())") == [0, 0, 0, 1]
+        assert encoding.decode_exponents("(...())") == deque([0, 0, 0, 1])
 
     def test_8(self):
-        assert encoding.decode_exponents("((.()))") == [3]
+        assert encoding.decode_exponents("((.()))") == deque([3])
 
     def test_9(self):
-        assert encoding.decode_exponents("(.(()))") == [0, 2]
+        assert encoding.decode_exponents("(.(()))") == deque([0, 2])
 
     def test_10(self):
-        assert encoding.decode_exponents("(().())") == [1, 0, 1]
+        assert encoding.decode_exponents("(().())") == deque([1, 0, 1])
 
     def test_11(self):
-        assert encoding.decode_exponents("(....())") == [0, 0, 0, 0, 1]
+        assert encoding.decode_exponents("(....())") == deque([0, 0, 0, 0, 1])
 
     def test_12(self):
-        assert encoding.decode_exponents("((())())") == [2, 1]
+        assert encoding.decode_exponents("((())())") == deque([2, 1])
 
 
 

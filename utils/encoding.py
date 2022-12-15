@@ -2,6 +2,7 @@ from utils.prime import is_prime
 from utils.prime import prime_factors
 from utils.prime import sieve_of_eratosthenes
 from utils.prime import next_prime
+from collections import deque
 
 
 def count_factors(factor: int, factor_list: list) -> int:
@@ -49,8 +50,8 @@ def encode(data: int) -> str:
 def decode_exponents(data: str) -> list:
     expression = data[1:-1]
 
-    char_stack = []
-    exponent_stack = []
+    char_stack = deque()
+    exponent_stack = deque()
 
     expression = data[1:-1]
     for i in range(0, len(expression)):
@@ -78,39 +79,21 @@ def decode_exponents(data: str) -> list:
 
 
 def decode(data: str) -> int:
-    if data == "":
+    if len(data) == 0:
         raise ValueError("Unable to decode empty string!")
 
     if data == ".":
         return 0
 
-    if data == "()":
-        return 1
+    exponents = decode_exponents(data)
 
-    stack = []
+    prime = 2
+    product = 1
 
-    base = 2
-    result = 1
+    for exponent in exponents:
+        product *= prime ** exponent
+        prime = next_prime(prime)
 
-    accumulator = 1
-
-    expression = data[1:-1]
-    for char in expression:
-        if char == ".":
-            stack.append(0)
-            continue
-
-        if char == '(':
-            stack.append(char)
-        else:
-            if stack[-1] == '(':
-                stack.pop()
-                stack.append(1)
-            else:
-                stack[-1] += 1
-
-    print()
-    print(stack)
-
+    return product
 
 
