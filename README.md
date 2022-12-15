@@ -51,9 +51,12 @@ To clean up the repository, run:
 invoke clean
 ```
 
-## Running the tests
-Run the tests with pytest:
+The default task cleans up executes syntax checks and runs tests with coverage.
+To execute all of these tasks simply run the following:
 
 ```bash
-pytest
+invoke
 ```
+
+## References
+- [Encoding Numbers using Dots and Parenthesis](https://www.youtube.com/watch?v=JY0_ApbZYkQ)
