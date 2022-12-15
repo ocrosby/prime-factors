@@ -2,7 +2,7 @@ from invoke import task
 
 
 @task(aliases=["u"])
-def update(c):
+def update_pip(c):
     print("Updating dependencies...")
     c.run("pip install --upgrade pip")
 
@@ -38,10 +38,10 @@ def cover(c):
 def lint(c):
     print("Linting...")
     c.run(
-        "poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics"
+        "flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics"
     )
     c.run(
-        "poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics"
+        "flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics"
     )
 
 
