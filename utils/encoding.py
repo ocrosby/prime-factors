@@ -46,6 +46,37 @@ def encode(data: int) -> str:
     return f"({buffer})"
 
 
+def decode_exponents(data: str) -> list:
+    expression = data[1:-1]
+
+    char_stack = []
+    exponent_stack = []
+
+    expression = data[1:-1]
+    for i in range(0, len(expression)):
+        char = expression[i]
+
+        if char == ".":
+            if len(char_stack) == 0:
+                exponent_stack.append(0)
+        elif char == '(':
+            if len(char_stack) == 0:
+                exponent_stack.append(0)
+
+            char_stack.append(char)
+        elif char == ')':
+            if len(char_stack) > 0:
+                char_stack.pop()
+
+                if len(exponent_stack) == 0:
+                    exponent_stack.append(0)
+
+                exponent_stack[-1] += 1
+
+
+    return exponent_stack
+
+
 def decode(data: str) -> int:
     if data == "":
         raise ValueError("Unable to decode empty string!")
@@ -61,11 +92,15 @@ def decode(data: str) -> int:
     base = 2
     result = 1
 
+    accumulator = 1
+
     expression = data[1:-1]
     for char in expression:
         if char == ".":
             stack.append(0)
-        elif char == '(':
+            continue
+
+        if char == '(':
             stack.append(char)
         else:
             if stack[-1] == '(':
@@ -74,6 +109,8 @@ def decode(data: str) -> int:
             else:
                 stack[-1] += 1
 
+    print()
+    print(stack)
 
 
 
