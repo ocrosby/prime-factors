@@ -37,7 +37,9 @@ class TestStack:
     def test_peek(self):
         stack = Stack()
         stack.push(1)
-        assert stack.peek() == 1
+        stack.push(2)
+        stack.push(3)
+        assert stack.peek() == 3
 
 
     def test_size_0(self):
