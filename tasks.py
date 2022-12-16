@@ -1,5 +1,9 @@
 from invoke import task
 
+@task(aliases=["i"])
+def install(c):
+    c.run("pip install -r requirements.txt")
+
 
 @task(aliases=["u"])
 def update_pip(c):
@@ -10,6 +14,7 @@ def update_pip(c):
 @task(aliases=["c"])
 def clean(c):
     print("Cleaning up...")
+    c.run("rm *.png")
     c.run("rm -rf coverage")
     c.run("rm -rf dist")
     c.run("rm -f .coverage")
@@ -49,3 +54,9 @@ def lint(c):
 def build(c):
     print("Building the project")
     c.run("poetry build")
+
+
+@task(aliases=["d"], pre=[clean])
+def diagrams(c):
+    print("Generating diagrams...")
+    c.run("python3 -m transition_diagram")
