@@ -4,18 +4,24 @@ class ReadTape:
         self.data = data
         self.index = 0
 
+    def eof(self) -> bool:
+        return self.index >= len(self.data)
+
+    def retract(self, n: int = 1):
+        self.index -= n
+
     def read(self) -> str:
-        if self.index >= len(self.data):
+        if self.eof():
             return ""
-        else:
-            self.index += 1
-            return self.data[self.index - 1]
+
+        self.index += 1
+        return self.data[self.index - 1]
 
     def peek(self) -> str:
-        if self.index >= len(self.data):
+        if self.eof():
             return ""
-        else:
-            return self.data[self.index]
+
+        return self.data[self.index]
 
     def __str__(self):
         return self.data[self.index:]
