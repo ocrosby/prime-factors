@@ -2,8 +2,8 @@ from utils.prime import is_prime
 from utils.prime import prime_factors
 from utils.prime import sieve_of_eratosthenes
 from utils.prime import next_prime
-from collections import deque
 from utils.tape import ReadTape, WriteTape
+from utils.adt import Stack
 
 
 class TuringMachine:
@@ -90,121 +90,66 @@ def encode(data: int) -> str:
     return f"({buffer})"
 
 
-class ValidationError(Exception):
-    def __init__(self, message):
-        self.message = message
-        super().__init__(self.message)
-
-
-def next_exponent(itape: ReadTape) -> int:
-    exponent = 1
-    stack = deque()
-
-    while not itape.eof():
-        char = itape.read()
-
-        if char == ".":
-            return None
-
-        if char == "(":
-            stack.append(char)
-        elif char == ")":
-            stack.pop()
-
-            if len(stack) == 0:
-                break
-            else:
-                exponent += 1
-
-    return exponent
-
-
-def experiment(data: str) -> list:
+def decode_factorization(data: str) -> list:
     """Return a list of tuples containing the prime factorization.
     The first element of each tuple is the prime factor, and the second element is the exponent.
 
     :param data:
     :return:
     """
-    char_stack = deque()
 
-    itape = ReadTape(data)
+    stack = Stack()
     factorization = []
 
     prime_factor = 2
     exponent = 0
 
-    while not itape.eof():
-        char = itape.read()
+    # Handle 0
+    if data == ".":
+        return []
+
+    # Handle 1
+    if data == "()":
+        return [(2, 0)]
+
+    tape = ReadTape(data[1:-1])
+
+    while not tape.eof():
+        char = tape.read()
 
         if char == ".":
-            if itape.eof():
-                return []
-        elif char == '(':
-            char_stack.append(char)
-        elif char == ')':
-            if len(factorization) == 0:
+            if stack.is_empty:
                 factorization.append((prime_factor, 0))
-            else:
-                factorization[-1] = (factorization[-1][0], factorization[-1][1] + 1)
-
-            char_stack.pop()
-
-            if len(char_stack) == 0:
-                exponent = 0
                 prime_factor = next_prime(prime_factor)
+                exponent = 0
+            else:
+                exponent += 1
+        elif char == "(":
+            stack.push(char)
+        elif char == ")":
+            if stack.peek() == "(":
+                stack.pop()
+                exponent += 1
+
+            if stack.is_empty:
+                factorization.append((prime_factor, exponent))
+                prime_factor = next_prime(prime_factor)
+                exponent = 0
 
     return factorization
-
-
-
-def decode_exponents(data: str) -> list:
-    expression = data[1:-1]
-
-    char_stack = deque()
-    exponent_stack = deque()
-
-    expression = data[1:-1]
-    for i in range(0, len(expression)):
-        char = expression[i]
-
-        if char == ".":
-            if len(char_stack) == 0:
-                exponent_stack.append(0)
-        elif char == '(':
-            if len(char_stack) == 0:
-                exponent_stack.append(0)
-
-            char_stack.append(char)
-        elif char == ')':
-            if len(char_stack) > 0:
-                char_stack.pop()
-
-                if len(exponent_stack) == 0:
-                    exponent_stack.append(0)
-
-                exponent_stack[-1] += 1
-
-
-    return exponent_stack
 
 
 def decode(data: str) -> int:
     if len(data) == 0:
         raise ValueError("Unable to decode empty string!")
 
-    if data == ".":
+    factorization = decode_factorization(data)
+
+    if len(factorization) == 0:
         return 0
 
-    exponents = decode_exponents(data)
+    value = 1
+    for factor, exponent in factorization:
+        value *= factor ** exponent
 
-    prime = 2
-    product = 1
-
-    for exponent in exponents:
-        product *= prime ** exponent
-        prime = next_prime(prime)
-
-    return product
-
-
+    return value
