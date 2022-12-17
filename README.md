@@ -62,6 +62,15 @@ To execute all of these tasks simply run the following:
 invoke
 ```
 
+## Running the program
+
+```bash
+python3 main.py
+```
+
+When running the program you won't be prompted for anything simply start typing numbers for encoding.
+
+When you are done just type exit to end the program.
 
 ## References
 - [Encoding Numbers using Dots and Parenthesis](https://www.youtube.com/watch?v=JY0_ApbZYkQ)
