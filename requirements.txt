@@ -3,4 +3,3 @@ pytest-cov
 pytest-mock
 invoke
 flake8
-diagrams

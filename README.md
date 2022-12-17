@@ -63,9 +63,5 @@ invoke
 ```
 
 
-## Transition Diagram for Turing Machine
-
-![Transition Diagram](transition_diagram.png)
-
 ## References
 - [Encoding Numbers using Dots and Parenthesis](https://www.youtube.com/watch?v=JY0_ApbZYkQ)
