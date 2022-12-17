@@ -1,55 +1,65 @@
 
 from utils.tape import ReadTape, WriteTape
 
+
 class TestReadTape:
+    def test_retract(self):
+        input_tape = ReadTape("something")
+        assert input_tape.read() == "s"
+        assert input_tape.read() == "o"
+
+        input_tape.retract()
+
+        assert input_tape.peek() == "o"
+
     def test_read(self):
-        itape = ReadTape("abc")
-        assert itape.read() == "a"
-        assert itape.read() == "b"
-        assert itape.read() == "c"
-        assert itape.read() == ""
+        input_tape = ReadTape("abc")
+        assert input_tape.read() == "a"
+        assert input_tape.read() == "b"
+        assert input_tape.read() == "c"
+        assert input_tape.read() == ""
 
     def test_peek(self):
-        itape = ReadTape("abc")
-        assert itape.peek() == "a"
-        assert itape.peek() == "a"
-        assert itape.read() == "a"
-        assert itape.peek() == "b"
-        assert itape.peek() == "b"
-        assert itape.read() == "b"
-        assert itape.peek() == "c"
-        assert itape.peek() == "c"
-        assert itape.read() == "c"
-        assert itape.peek() == ""
-        assert itape.peek() == ""
-        assert itape.read() == ""
-        assert itape.peek() == ""
-        assert itape.peek() == ""
-        assert itape.read() == ""
+        input_tape = ReadTape("abc")
+        assert input_tape.peek() == "a"
+        assert input_tape.peek() == "a"
+        assert input_tape.read() == "a"
+        assert input_tape.peek() == "b"
+        assert input_tape.peek() == "b"
+        assert input_tape.read() == "b"
+        assert input_tape.peek() == "c"
+        assert input_tape.peek() == "c"
+        assert input_tape.read() == "c"
+        assert input_tape.peek() == ""
+        assert input_tape.peek() == ""
+        assert input_tape.read() == ""
+        assert input_tape.peek() == ""
+        assert input_tape.peek() == ""
+        assert input_tape.read() == ""
 
     def test_str(self):
-        itape = ReadTape("abc")
-        assert str(itape) == "abc"
-        assert itape.read() == "a"
-        assert str(itape) == "bc"
-        assert itape.read() == "b"
-        assert str(itape) == "c"
-        assert itape.read() == "c"
-        assert str(itape) == ""
-        assert itape.read() == ""
-        assert str(itape) == ""
+        input_tape = ReadTape("abc")
+        assert str(input_tape) == "abc"
+        assert input_tape.read() == "a"
+        assert str(input_tape) == "bc"
+        assert input_tape.read() == "b"
+        assert str(input_tape) == "c"
+        assert input_tape.read() == "c"
+        assert str(input_tape) == ""
+        assert input_tape.read() == ""
+        assert str(input_tape) == ""
 
     def test_repr(self):
-        itape = ReadTape("abc")
-        assert repr(itape) == "abc"
-        assert itape.read() == "a"
-        assert repr(itape) == "bc"
-        assert itape.read() == "b"
-        assert repr(itape) == "c"
-        assert itape.read() == "c"
-        assert repr(itape) == ""
-        assert itape.read() == ""
-        assert repr(itape) == ""
+        input_tape = ReadTape("abc")
+        assert repr(input_tape) == "abc"
+        assert input_tape.read() == "a"
+        assert repr(input_tape) == "bc"
+        assert input_tape.read() == "b"
+        assert repr(input_tape) == "c"
+        assert input_tape.read() == "c"
+        assert repr(input_tape) == ""
+        assert input_tape.read() == ""
+        assert repr(input_tape) == ""
 
 
 class TestWriteTape:

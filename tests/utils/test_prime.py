@@ -2,6 +2,26 @@ from utils.prime import prime_factors
 from utils.prime import sieve_of_eratosthenes
 from utils.prime import least_prime_factor
 from utils.prime import next_prime
+from utils.prime import is_prime
+
+class TestIsPrime:
+    def test_0(self):
+        assert not is_prime(0)
+
+    def test_1(self):
+        assert not is_prime(1)
+
+    def test_2(self):
+        assert is_prime(2)
+
+    def test_3(self):
+        assert is_prime(3)
+
+    def test_4(self):
+        assert not is_prime(4)
+
+    def test_5(self):
+        assert is_prime(5)
 
 
 class TestPrimeFactors:
@@ -64,6 +84,9 @@ class TestPrimeFactors:
 
 
 class TestLeastPrimeFactor:
+    def test_0(self):
+        assert least_prime_factor(0) == 0
+
     def test_1(self):
         assert least_prime_factor(1) == 1
 

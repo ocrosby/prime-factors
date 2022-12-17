@@ -58,3 +58,12 @@ class TestStack:
         stack = Stack(items=[1,2,3])
         assert stack.size == 3
 
+    def test_repr(self):
+        stack = Stack(items=[1,2,3])
+        assert repr(stack) == "1,2,3"
+
+    def test_str(self):
+        stack = Stack(items=[1,2,3])
+        assert str(stack) == "1,2,3"
+
+
