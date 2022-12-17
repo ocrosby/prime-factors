@@ -54,9 +54,3 @@ def lint(c):
 def build(c):
     print("Building the project")
     c.run("poetry build")
-
-
-@task(aliases=["d"], pre=[clean])
-def diagrams(c):
-    print("Generating diagrams...")
-    c.run("python3 -m transition_diagram")
