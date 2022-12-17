@@ -1,5 +1,10 @@
-def main():
-    pass
+from utils.encoding import encode
 
 if __name__ == "__main__":
-    main()
+    buffer = input()
+    while buffer != 'exit':
+        value = int(buffer)
+        encoded_value = encode(value)
+
+        print(encoded_value)
+        buffer = input()
