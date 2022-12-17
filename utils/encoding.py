@@ -13,19 +13,6 @@ def count_factors(factor: int, factor_list: list) -> int:
             count += 1
     return count
 
-
-def has_repeating_factors(data: int) -> bool:
-    factor_list = prime_factors(data)
-    factor_set = set(factor_list)
-
-    for factor in factor_set:
-        exponent = count_factors(factor, factor_list)
-        if exponent > 1:
-            return True
-
-    return False
-
-
 def encode(data: int) -> str:
     if data == 0:
         return "."
