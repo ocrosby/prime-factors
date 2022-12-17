@@ -36,3 +36,9 @@ class Stack:
 
         return self.items[len(self.items)-1]
 
+    def __str__(self):
+        return self.__repr__()
+
+    def __repr__(self):
+        return ",".join([str(item) for item in self.items])
+
