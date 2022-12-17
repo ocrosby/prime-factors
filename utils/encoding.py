@@ -13,6 +13,7 @@ def count_factors(factor: int, factor_list: list) -> int:
             count += 1
     return count
 
+
 def encode(data: int) -> str:
     if data == 0:
         return "."
@@ -22,7 +23,6 @@ def encode(data: int) -> str:
 
     primes_lte = sieve_of_eratosthenes(data)
     factor_list = prime_factors(data)
-    # factor_set = set(factor_list)
 
     buffer = ""
     for prime in primes_lte:
