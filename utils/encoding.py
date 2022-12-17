@@ -6,48 +6,6 @@ from utils.tape import ReadTape, WriteTape
 from utils.adt import Stack
 
 
-class TuringMachine:
-    state: int
-    itape: ReadTape
-    otape: WriteTape
-
-    def __init__(self, data: str):
-        self.state = 0
-        self.itape = ReadTape(data)
-        self.otape = WriteTape()
-        self.transitions = {
-            0: {
-                "(": ("(", 1, "R"),
-                ".": (".", 2, "R"),
-                ")": (")", 3, "R"),
-            },
-
-        }
-
-    def step(self):
-        if self.itape.eof():
-            return False
-
-        current_char = self.itape.read()
-        transition = self.transitions[self.state][current_char]
-        self.otape.write(transition[0])
-        self.state = transition[1]
-
-        if transition[2] == "L":
-            self.itape.retract()
-        elif transition[2] == "R":
-            self.itape.read()
-
-        return True
-
-    def run(self):
-        while self.step():
-            pass
-
-        return self.output_tape
-
-
-
 def count_factors(factor: int, factor_list: list) -> int:
     count = 0
     for i in factor_list:
