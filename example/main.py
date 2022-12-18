@@ -23,13 +23,6 @@ def sieve_of_eratosthenes(n: int) -> list:
 
     return [i for i in range(len(primes)) if primes[i]]
 
-def is_even(n: int) -> bool:
-    """Return True if n is even, False otherwise.
-
-    :param n: The number to check for evenness.
-    :return: True if n is even, False otherwise.
-    """
-    return n % 2 == 0
 
 def least_prime_factor(n: int) -> int:
     """Return the least prime factor of n.
@@ -43,7 +36,7 @@ def least_prime_factor(n: int) -> int:
     if n == 1:
         return 1
 
-    if is_even(n):
+    if n % 2 == 0:
         return 2
 
     for i in range(3, int(n ** 0.5) + 1, 2):
@@ -81,7 +74,7 @@ def is_prime(n: int) -> bool:
     if n == 2:
         return True
 
-    if is_even(n):
+    if n % 2 == 0:
         return False
 
     for i in range(3, int(n ** 0.5) + 1, 2):
@@ -92,7 +85,12 @@ def is_prime(n: int) -> bool:
 
 
 def count_factors(factor: int, factor_list: list) -> int:
-    """Return the number of times factor appears in factor_list."""
+    """Return the number of times factor appears in factor_list.
+
+    :param factor: The factor to count.
+    :param factor_list: The list of factors to count factor in.
+    :return: The number of times factor appears in factor_list.
+    """
     count = 0
     for i in factor_list:
         if i == factor:
