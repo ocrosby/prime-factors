@@ -109,7 +109,7 @@ def least_prime_factor(n: int) -> int:
     if n % 2 == 0:
         return 2
 
-    for i in range(3, int(n ** 0.5) + 1, 2):
+    for i in range(3, int(sqrt(n)) + 1, 2):
         if n % i == 0:
             return i
 
@@ -169,7 +169,7 @@ def count_factors(factor: int, factor_list: list) -> int:
     return count
 
 
-def encode(data: int) -> str:
+def encode(data: int, primes_lte: list = None) -> str:
     """Return a string representation of data.
 
     :param data: The data to encode.
@@ -181,8 +181,9 @@ def encode(data: int) -> str:
     if data == 1:
         return "()"
 
-    # primes_lte = sieve_of_eratosthenes(data)
-    primes_lte = sieve_of_atkin(data)
+    if primes_lte is None:
+        primes_lte = sieve_of_eratosthenes(data)
+
     factor_list = prime_factors(data)
     max_factor = max(factor_list)
 
@@ -199,10 +200,19 @@ def encode(data: int) -> str:
 
 
 if __name__ == "__main__":
+    inputs = []
+
     while True:
         line = sys.stdin.readline()
 
         if not line:
             break
 
-        print(encode(int(line)))
+        inputs.append(int(line))
+
+    max_input = max(inputs)
+
+    primes = sieve_of_eratosthenes(max_input)
+
+    for input in inputs:
+        print(encode(input, primes))
