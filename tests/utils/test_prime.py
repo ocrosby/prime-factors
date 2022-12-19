@@ -4,6 +4,7 @@ from utils.prime import least_prime_factor
 from utils.prime import next_prime
 from utils.prime import is_prime
 
+
 class TestIsPrime:
     def test_0(self):
         assert not is_prime(0)
