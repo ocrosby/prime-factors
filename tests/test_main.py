@@ -1,6 +1,122 @@
 from main import sieve_of_atkin
+from main import is_prime
+from main import prime_factors
+from main import least_prime_factor
 from main import encode
 from main import sieve_of_eratosthenes
+
+class TestIsPrime:
+    def test_0(self):
+        assert not is_prime(0)
+
+    def test_1(self):
+        assert not is_prime(1)
+
+    def test_2(self):
+        assert is_prime(2)
+
+    def test_3(self):
+        assert is_prime(3)
+
+    def test_4(self):
+        assert not is_prime(4)
+
+    def test_5(self):
+        assert is_prime(5)
+
+
+class TestPrimeFactors:
+    def test_0(self):
+        assert prime_factors(0) == []
+
+    def test_1(self):
+        assert prime_factors(1) == []
+
+    def test_2(self):
+        assert prime_factors(2) == [2]
+
+    def test_3(self):
+        assert prime_factors(3) == [3]
+
+    def test_4(self):
+        assert prime_factors(4) == [2, 2]
+
+    def test_5(self):
+        assert prime_factors(5) == [5]
+
+    def test_6(self):
+        assert prime_factors(6) == [2, 3]
+
+    def test_7(self):
+        assert prime_factors(7) == [7]
+
+    def test_8(self):
+        assert prime_factors(8) == [2, 2, 2]
+
+    def test_9(self):
+        assert prime_factors(9) == [3, 3]
+
+    def test_10(self):
+        assert prime_factors(10) == [2, 5]
+
+    def test_11(self):
+        assert prime_factors(11) == [11]
+
+    def test_12(self):
+        assert prime_factors(12) == [2, 2, 3]
+
+    def test_13(self):
+        assert prime_factors(13) == [13]
+
+    def test_14(self):
+        assert prime_factors(14) == [2, 7]
+
+    def test_15(self):
+        assert prime_factors(15) == [3, 5]
+
+    def test_16(self):
+        assert prime_factors(16) == [2, 2, 2, 2]
+
+    def test_17(self):
+        assert prime_factors(17) == [17]
+
+    def test_12246(self):
+        assert prime_factors(12246) == [2, 3, 13, 157]
+
+
+class TestLeastPrimeFactor:
+    def test_0(self):
+        assert least_prime_factor(0) == 0
+
+    def test_1(self):
+        assert least_prime_factor(1) == 1
+
+    def test_2(self):
+        assert least_prime_factor(2) == 2
+
+    def test_3(self):
+        assert least_prime_factor(3) == 3
+
+    def test_4(self):
+        assert least_prime_factor(4) == 2
+
+    def test_5(self):
+        assert least_prime_factor(5) == 5
+
+    def test_6(self):
+        assert least_prime_factor(6) == 2
+
+    def test_7(self):
+        assert least_prime_factor(7) == 7
+
+    def test_8(self):
+        assert least_prime_factor(8) == 2
+
+    def test_9(self):
+        assert least_prime_factor(9) == 3
+
+    def test_10(self):
+        assert least_prime_factor(10) == 2
 
 
 class TestEncode:
