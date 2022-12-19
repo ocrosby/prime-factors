@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-import math
 import sys
+
+from math import ceil, sqrt, pow
 
 
 def sieve_of_eratosthenes(n: int) -> list:
@@ -23,42 +24,74 @@ def sieve_of_eratosthenes(n: int) -> list:
 
     return [i for i in range(len(primes)) if primes[i]]
 
+
+class SieveOfAtkin:
+    def __init__(self, limit):
+        self.limit = limit
+        self.primes = []
+        self.sieve = [False] * (self.limit + 1)
+
+    def flip(self, prime):
+        try:
+            self.sieve[prime] = True if self.sieve[prime] == False else False
+        except KeyError:
+            pass
+
+    def invalidate(self, prime):
+        try:
+            if self.sieve[prime] == True: self.sieve[prime] = False
+        except KeyError:
+            pass
+
+    def is_prime(self, prime):
+        try:
+            return self.sieve[prime]
+        except KeyError:
+            return False
+
+    def get_primes(self):
+        testing_limit = int(ceil(sqrt(self.limit)))
+
+        for i in range(testing_limit):
+            for j in range(testing_limit):
+                # n = 4*i^2 + j^2
+                n = 4 * int(pow(i, 2)) + int(pow(j, 2))
+                if n <= self.limit and (n % 12 == 1 or n % 12 == 5):
+                    self.flip(n)
+
+                # n = 3*i^2 + j^2
+                n = 3 * int(pow(i, 2)) + int(pow(j, 2))
+                if n <= self.limit and n % 12 == 7:
+                    self.flip(n)
+
+                # n = 3*i^2 - j^2
+                n = 3 * int(pow(i, 2)) - int(pow(j, 2))
+                if n <= self.limit and i > j and n % 12 == 11:
+                    self.flip(n)
+
+        for i in range(5, testing_limit):
+            if self.is_prime(i):
+                k = int(pow(i, 2))
+                for j in range(k, self.limit, k):
+                    self.invalidate(j)
+
+        self.primes = [2, 3] + [x for x in range(len(self.sieve)) if self.is_prime(x) and x >= 5]
+        return self.primes
+
+
 def sieve_of_atkin(limit: int) -> list:
     """Return a list of prime numbers less than or equal to n.
 
     :param n: The upper limit of the range of numbers to check for primality.
     :return: A list of prime numbers less than or equal to n.
     """
-    # 2 and 3 are known
-    # to be prime
-    P = [2, 3]
-    r = range(1, int(math.sqrt(limit)) + 1)
-    sieve = [False] * (limit + 1)
-    for x in r:
-        for y in r:
-            xx = x * x
-            yy = y * y
-            xx3 = 3 * xx
-            n = 4 * xx + yy
-            if n <= limit and (n % 12 == 1 or n % 12 == 5): sieve[n] = not sieve[n]
-            n = xx3 + yy
-            if n <= limit and n % 12 == 7: sieve[n] = not sieve[n]
-            n = xx3 - yy
-            if x > y and n <= limit and n % 12 == 11: sieve[n] = not sieve[n]
-    for x in range(5, int(math.sqrt(limit))):
-        if sieve[x]:
-            xx = x * x
-            for y in range(xx, limit + 1, xx):
-                sieve[y] = False
-    for p in range(5, limit):
-        if sieve[p]: P.append(p)
-    return P
+    if limit < 2:
+        return []
 
-    # Print primes
-    # using sieve[]
-    # for a in range(5, n + 1):
-    #     if sieve[a]:
-    #         print(a, end=" ")
+    if limit == 2:
+        return [2]
+
+    return SieveOfAtkin(limit).get_primes()
 
 
 def least_prime_factor(n: int) -> int:
