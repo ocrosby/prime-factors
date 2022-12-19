@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import math
 import sys
 
 
@@ -22,6 +22,43 @@ def sieve_of_eratosthenes(n: int) -> list:
                 primes[j] = False
 
     return [i for i in range(len(primes)) if primes[i]]
+
+def sieve_of_atkin(limit: int) -> list:
+    """Return a list of prime numbers less than or equal to n.
+
+    :param n: The upper limit of the range of numbers to check for primality.
+    :return: A list of prime numbers less than or equal to n.
+    """
+    # 2 and 3 are known
+    # to be prime
+    P = [2, 3]
+    r = range(1, int(math.sqrt(limit)) + 1)
+    sieve = [False] * (limit + 1)
+    for x in r:
+        for y in r:
+            xx = x * x
+            yy = y * y
+            xx3 = 3 * xx
+            n = 4 * xx + yy
+            if n <= limit and (n % 12 == 1 or n % 12 == 5): sieve[n] = not sieve[n]
+            n = xx3 + yy
+            if n <= limit and n % 12 == 7: sieve[n] = not sieve[n]
+            n = xx3 - yy
+            if x > y and n <= limit and n % 12 == 11: sieve[n] = not sieve[n]
+    for x in range(5, int(math.sqrt(limit))):
+        if sieve[x]:
+            xx = x * x
+            for y in range(xx, limit + 1, xx):
+                sieve[y] = False
+    for p in range(5, limit):
+        if sieve[p]: P.append(p)
+    return P
+
+    # Print primes
+    # using sieve[]
+    # for a in range(5, n + 1):
+    #     if sieve[a]:
+    #         print(a, end=" ")
 
 
 def least_prime_factor(n: int) -> int:
@@ -111,7 +148,8 @@ def encode(data: int) -> str:
     if data == 1:
         return "()"
 
-    primes_lte = sieve_of_eratosthenes(data)
+    # primes_lte = sieve_of_eratosthenes(data)
+    primes_lte = sieve_of_atkin(data)
     factor_list = prime_factors(data)
     max_factor = max(factor_list)
 
