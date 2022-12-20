@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import sys
 
-from math import ceil, sqrt, pow
-
 inputs = []
 
 while True:
