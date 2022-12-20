@@ -3,6 +3,7 @@ from main import is_prime
 from main import prime_factors
 from main import least_prime_factor
 from main import encode
+from main import convert
 from main import sieve_of_eratosthenes
 
 class TestIsPrime:
@@ -119,6 +120,21 @@ class TestLeastPrimeFactor:
         assert least_prime_factor(10) == 2
 
 
+class TestConvert:
+    def test_0(self):
+        assert convert(0) == "."
+
+    def test_1(self):
+        assert convert(1) == "()"
+
+    def test_2(self):
+        assert convert(2) == "(())"
+
+
+    def test_3(self):
+        assert convert(3) == "(.())"
+
+
 class TestEncode:
     def test_0(self):
         assert encode(0) == "."
@@ -155,6 +171,9 @@ class TestEncode:
 
     def test_11(self):
         assert encode(11) == "(....())"
+
+    def test_12(self):
+        assert encode(12) == "((())())"
 
 
 class TestSieveOfAtkin:
